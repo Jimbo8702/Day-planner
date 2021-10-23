@@ -13,43 +13,51 @@ var sixthBlock = $("#six");
 var seventhBlock = $("#seven");
 var eighthBlock = $("#eight");
 var ninthBlock = $("#nine");
-
+var btnOne = $("#button1");
+var btnTwo = $("#button2");
+var btnThree = $("#button3");
+var btnFour = $("#button4");
+var btnFive = $("#button5");
+var btnSix = $("#button6");
+var btnSeven = $("#button7");
+var btnEight = $("#button8");
+var btnNine = $("#button9");
+var textOne = $("#text1");
+var textTwo = $("#text2");
+var textThree = $("#text3");
+var textFour = $("#text4");
+var textFive = $("#text5");
+var textSix = $("#text6");
+var textSeven = $("#text7");
+var textEight = $("#text8");
+var textNine = $("#text9");
 //data
 var time = moment();
 var newTime = moment().format("h:mm a");
-//current time to print to screed(header)
-
 //funcitons
-
-//Master funciton
 function runPlanner() {
   timeOfDay();
   getTime();
-  console.log(firstBlock.text());
+  getStorage();
 }
-//handle page load
-
 //helper functions
 function getTime() {
   var currentTime = time.format("dddd, h:mm a");
   head.text(currentTime);
 }
-function setStorage(event) {
-  //var textContent = textAreas.text;
-  //localStorage.setItem("textArea", textContent);
+
+function getStorage() {
+  for (var i = 1; i < 10; i++) {
+    var item = localStorage.getItem("button" + [i]);
+    if (item == null) {
+      console.log("empty");
+    } else {
+      var element = $("#text" + [i]);
+      element.text(item);
+    }
+  }
 }
-//save input to local storage
 
-// function getStorage() {
-//   for (var i = 1; i <= 9; i++) {
-//     var timeBlock = $(`#${i}`);
-//     localStorage.getItem();
-//     textAreas.text(currentTime);
-//   }
-// }
-
-//grab from local storage
-//display on page
 function timeOfDay() {
   if (firstBlock.text() > newTime) {
     firstBlock.siblings().addClass("future");
@@ -116,13 +124,36 @@ function timeOfDay() {
   }
 }
 
-//based on current time, apply new css classes
-//(If less then current time ==> new color)
-
 //user interactions
 
 //buttons with event listeners (save input to local storage)
-saveBtn.on("click", setStorage);
+btnOne.on("click", function () {
+  localStorage.setItem("button1", textOne.val());
+});
+btnTwo.on("click", function () {
+  localStorage.setItem("button2", textTwo.val());
+});
+btnThree.on("click", function () {
+  localStorage.setItem("button3", textThree.val());
+});
+btnFour.on("click", function () {
+  localStorage.setItem("button4", textFour.val());
+});
+btnFive.on("click", function () {
+  localStorage.setItem("button5", textFive.val());
+});
+btnSix.on("click", function () {
+  localStorage.setItem("button6", textSix.val());
+});
+btnSeven.on("click", function () {
+  localStorage.setItem("button7", textSeven.val());
+});
+btnEight.on("click", function () {
+  localStorage.setItem("button8", textEight.val());
+});
+btnNine.on("click", function () {
+  localStorage.setItem("button9", textNine.val());
+});
 
 //initilization
 runPlanner();
